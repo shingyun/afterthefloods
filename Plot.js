@@ -113,10 +113,10 @@ function Flow(){
 
 	    //Plot axis
         var xAxis = plot.select('.axis-x').size() ===0?
-    	            plot.append('g').attr('class','axis-x'):selection.select('.axis-x');
+    	            plot.append('g').attr('class','axis-x'):plot.select('.axis-x');
 
         var yAxis = plot.select('.axis-y').size() ===0?
-    	            plot.append('g').attr('class','axis-y'):selection.select('.axis-y');
+    	            plot.append('g').attr('class','axis-y'):plot.select('.axis-y');
 
 	    xAxis.classed('axis',true)
 	        .attr('transform','translate(50,'+570+')')
@@ -128,12 +128,13 @@ function Flow(){
 	        .call(axisCause);
 
         //labels
-	    plot.append('text')
-	        .attr('class','label')
-	        .attr('x',125)
-	        .attr('y',350)
-	        .style('stroke-width','none')
-	        .text('All causes');
+        if(plot.select('.label').size() ===0){
+           plot.append('text').attr('class','flow-label')
+                        .attr('x',125)
+                        .attr('y',350)
+                        .style('stroke-width','none')
+                        .text('All causes');
+        }
 
 	    //Line and area generator
 	    line = d3.line()
@@ -246,7 +247,6 @@ function Flow(){
             
         numberEachEnter = numberEachUpdate
             .enter()
-            .append('g')
             .append('text')
             .classed('number-each',true)
             .merge(numberUpdate)
@@ -254,11 +254,17 @@ function Flow(){
             .attr('y',function(d){ return scaleValue(d.value)-5})
             .style('font-size','11px')
             .style('text-anchor','middle')
-            .text(function(d){ return d.value})
+            .text(function(d){ 
+            	var f = d3.format(',')
+            	return f(Math.round(d.value))
+            })
+            
         
         //ROTATE!!!!!!!????????
-        d3.selectAll('number-wrap.g')
-          .attr('transform','rotate(15)')
+        // d3.selectAll('.number-each')
+        //   .each(function(){
+        //   	d3.select(this).attr('transform','rotate(15)')
+        //   })
         
 
         //data exit does not work for now ...

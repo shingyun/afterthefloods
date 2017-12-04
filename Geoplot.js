@@ -150,6 +150,7 @@ function Geoplot(){
 	       .style('stroke',bgCol)
 	       .style('opacity',0.3);
 
+
         //Remove the geo plot and paste again later
 	    d3.selectAll('.allCountries').remove();
 
@@ -166,9 +167,51 @@ function Geoplot(){
 	        .attr('transform','translate(0,0)')
 	        .attr('class','country')
 	        .attr('id',function(d){return d.key})
-	        .on('click',function(d){
-	        	console.log(d.key)
+	        .on('mouseenter',function(d){
+                var f = d3.format(',')
+                
+                //Tooltip
+                d3.select('.tooltip').style('visibility','visible');
+
+	        	d3.select('.tooltip')
+                   .append('p')
+                   .attr('id','tooltip-country')
+                   .html(d.key);
+
+                tooltip = d3.select('.tooltip')
+                    .selectAll('.tooltip-cause')
+                    .data(d.values);
+
+                tooltipEnter = tooltip
+                    .enter()
+                    .append('p')
+                    .attr('class','tooltip-cause')
+                    .html(function(d){
+                        return d.key + ': ' + f(Math.round(d.value));
+                    })
+                
+                //Hight causes of a country
+                d3.select(this)
+                  .selectAll('.segment')
+                  .style('fill',highlightCol)
+                  .style('stroke',highlightCol)
+                  .style('opacity',hightlightOpa);
+
+
 	        })
+            .on('mouseleave',function(d){
+                 d3.select('.tooltip').style('visibility','hidden');
+                 d3.select('#tooltip-country').remove();
+                 d3.selectAll('.tooltip-cause').remove();   
+                 
+                 d3.select(this)
+                   .selectAll('.segment')
+                   .style('fill',mainCol)
+                   .style('stroke',mainCol)
+                   .style('opacity',defaultOpa)
+
+            })
+
          
         countryEnter.merge(countryUpdate)
 	        .attr('transform',function(d){
@@ -222,38 +265,38 @@ function Geoplot(){
         
         // countryUpdate.exit().remove();
         radialBarUpdate.exit().remove();
+       
+        //Interaction of segment
+        // countryEnter.selectAll('.segment')
+        //     .on('mouseenter',function(d){
 
-        countryEnter.selectAll('.segment')
-            .on('mouseenter',function(d){
-            	d3.select(this).style('opacity',hightlightOpa)
-         
-            	var no_space = d.key.split(' ').join('')
-
-                d3.select('.allCountries')
-            	  .selectAll('.segment.'+no_space)
-                  .style('opacity',hightlightOpa)
-                  .style('fill', highlightCol)
-                  .style('stroke',highlightCol);
-  
-            	d3.selectAll('.legend')
-            	  .selectAll('.seg-legend.'+no_space)
-            	  .style('opacity',hightlightOpa)
-            	  .style('fill', highlightCol)
-                  .style('stroke',highlightCol);;
-            })
-            .on('mouseleave',function(d){
-            	d3.select(this).style('opacity',0.2);
-            	d3.selectAll('.segment')
-            	  .style('opacity',0.2)                  
-            	  .style('fill', mainCol)
-                  .style('stroke',mainCol);
-            	d3.selectAll('.seg-legend').style('opacity',0.2)
-            	  .style('fill', mainCol)
-                  .style('stroke',mainCol);
-            })
-            .on('click',function(d){
-            	console.log(d);
-            }) 
+        //     	// d3.select(this).style('opacity',hightlightOpa)
+        //     	// var no_space = d.key.split(' ').join('')
+        //      //    d3.select('.allCountries')
+        //     	//   .selectAll('.segment.'+no_space)
+        //      //      .style('opacity',hightlightOpa)
+        //      //      .style('fill', highlightCol)
+        //      //      .style('stroke',highlightCol);
+        //     	// d3.selectAll('.legend')
+        //     	//   .selectAll('.seg-legend.'+no_space)
+        //     	//   .style('opacity',hightlightOpa)
+        //     	//   .style('fill', highlightCol)
+        //      //      .style('stroke',highlightCol);;
+        //     })
+        //     .on('mouseleave',function(d){
+        //     	// d3.select(this).style('opacity',0.2);
+        //         //Hight all cause
+        //     	// d3.selectAll('.segment')
+        //     	//   .style('opacity',0.2)                  
+        //     	//   .style('fill', mainCol)
+        //      //      .style('stroke',mainCol);
+        //     	// d3.selectAll('.seg-legend').style('opacity',0.2)
+        //     	//   .style('fill', mainCol)
+        //      //      .style('stroke',mainCol);
+        //     })
+        //     .on('click',function(d){
+        //     	console.log(d);
+            // }) 
        
         //Plot the interactive legend
         scaleLegend = d3.scaleLinear()
@@ -311,13 +354,14 @@ function Geoplot(){
 
         //Labels on Legend    
         //labels
-	    plot.append('text')
-	        .attr('class','label')
-	        .attr('x',20)
-	        .attr('y',280)
-	        .style('stroke-width','none')
-	        .text('All causes');
-
+        if(plot.select('.label').size() ===0){
+           plot.append('text').attr('class','geo-label')
+                        .attr('x',20)
+                        .attr('y',280)
+                        .style('stroke-width','none')
+                        .text('All causes');
+        }
+                 
         var labelRadius = R_MAX * 1.025;
         
         var labelPlot = plot.select('.labels').size() ===0?

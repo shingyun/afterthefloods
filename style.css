@@ -84,7 +84,7 @@ h1{
 }
 
 .tick text{
-	font-family: 'Courier New', Courier, monospace;
+/*	font-family: 'Courier New', Courier, monospace;*/
 	fill: #c3c3c3;
 	font-size: 12px;
 }
@@ -93,7 +93,7 @@ g.axis-y {
 	position: fixed;
 }
 
-.label{
+.flow-label, .geo-label{
 	fill: #58A5C0;
 }
 
@@ -104,7 +104,7 @@ g.axis-y {
 .number-each {
     font-family: 'Courier New', Courier, monospace;
     fill: white;
-/*	transform: rotate(90);*/
+	/*transform: rotate(90);*/
 
 }
 
@@ -112,6 +112,7 @@ g.axis-y {
 
 .geo-plot{
  /*  height: 600px;*/
+   position: relative;
 }
 
 .legend, .labels:hover{
@@ -119,8 +120,34 @@ g.axis-y {
 }
 
 .seg-label{
-/*	font-family: 'Courier New', Courier, monospace;*/
 	fill: white;
+}
+
+.tooltip{
+    position: absolute;
+    top: 20px;
+    left: 500px;
+    width: 630px;
+    height: 80px;
+    color: #c8c8c8;
+    padding-left: 10px;
+    border-left: 2px solid #58A5C0;
+    visibility: hidden;
+}
+
+#tooltip-country, .tooltip-cause{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#tooltip-country{
+    font-size: 14px;
+}
+
+.tooltip-cause{
+    width: 210px;
+    display: inline-block;
+    font-size: 12px;
+
 }
 
 
@@ -213,11 +240,11 @@ g.axis-y {
 	cursor: pointer;
 }
 
-.point1{
+#point1{
 	opacity: 1
 }
 
-.point2, .point3{
+#point2, #point3{
     margin-top:5px;
 }
 
