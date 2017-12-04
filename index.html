@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>After The Flood</title>
+    <link href="style.css" rel="stylesheet"/>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.js'></script>>
+</head>
+<body>
+    <div class = 'cover'>
+      <h1 class = 'headline'>After The Flood</h1>
+      <p class = 'subtitle'>What caused the water disasters around the world?</p>
+      <div class = 'bubble' id = 'bubble'></div>
+    </div>
+    <div class = 'flow-chart-area'>
+      <div class = 'chart-title' id = 'chart-title-timeline'>Causes and Impact Over 30 Years</div>
+      <div class = 'plot' id = 'plot1'></div>
+      <div class = 'dropdown' id = 'dropdown-timeline'>
+         <p class = 'select-text'>Select an impact</p>
+         <div class = 'dropbtn' id = 'dropbtn-timeline'> Floods (count)</div>
+         <div class='dropdown-content'>
+           <div class = 'button' id = 'button0'>Floods (count)</div>
+           <div class = 'button' id = 'button1'>Death (people)</div>
+           <div class = 'button' id = 'button2'>Displaced (people)</div>
+           <div class = 'button' id = 'button3'>Duration (days)</div>
+           <div class = 'button' id = 'button4'>Affected area (sq km)</div>
+         </div>
+      </div>
+      
+    </div>
+
+    <div class = 'map-area'>
+      <div class = 'chart-title' id = 'chart-title-map'>Causes and Impact Across The World</div>
+      <div class = 'geo-plot' id = 'geo-plot'></div>
+      <div class = 'dropdown' id = 'dropdown-map'>
+          <p class = 'select-text'>Select an impact</p>
+          <div class = 'dropbtn' id = 'dropbtn-map'> Floods (count)</div>
+          <div class='dropdown-content'>
+            <div class = 'geo-button' id = 'geo-button0'>Floods (count)</div>
+            <div class = 'geo-button' id = 'geo-button1'>Death (people)</div>
+            <div class = 'geo-button' id = 'geo-button2'>Displaced (people)</div>
+            <div class = 'geo-button' id = 'geo-button3'>Duration (days)</div>
+            <div class = 'geo-button' id = 'geo-button4'>Affected area (sq km)</div>
+          </div>
+      </div>
+    </div>
+    <div class = 'viewpoints'>
+      <div class = 'viewpoint point1'></div>
+      <div class = 'viewpoint point2'></div>
+      <div class = 'viewpoint point3'></div>
+    </div>
+
+  
+
+<!-- <script src="d3.js"></script> -->
+<script src="Bubble.js"></script>
+<script src="radialBarChart.js"></script>>
+<!-- <script src="Mouse.js"></script> -->
+<script src="Plot.js"></script>
+<script src="Geoplot.js"></script>
+<!-- <script src="Scatterplot.js"></script>
+<script src="ScatterplotGraphic.js"></script> -->
+<script src="scriptMain.js"></script>
+
+</body>
+</html>
