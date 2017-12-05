@@ -132,10 +132,13 @@ function Geoplot(){
 
  	    map = d3.map(geoArray, function(d){return d.country})
 
+        var wrapper = plot.select('.wrapper').size() ===0?
+                plot.append('g').attr('class','wrapper'):plot.select('.wrapper');
+
 
         //Only plot the map one time
-    	var mapPlot = plot.select('.mapData').size() ===0?
-    	           plot.append('g').attr('class','mapData'):plot.select('.mapData');
+    	var mapPlot = wrapper.select('.mapData').size() ===0?
+    	           wrapper.append('g').attr('class','mapData'):plot.select('.mapData');
 
         //Plot the map
 	    mapPlot.attr('transform','translate(0,0)')
@@ -150,12 +153,12 @@ function Geoplot(){
 	       .style('stroke',bgCol)
 	       .style('opacity',0.3);
 
-
         //Remove the geo plot and paste again later
+        d3.select('.geo-label').remove();
 	    d3.selectAll('.allCountries').remove();
 
         //Plot the g by country geographically
-	    countryUpdate = plot
+	    countryUpdate = wrapper
 	        .append('g')
 	        .attr('class','allCountries')
 	        .selectAll('.country')
@@ -197,7 +200,6 @@ function Geoplot(){
                   .style('stroke',highlightCol)
                   .style('opacity',hightlightOpa);
 
-
 	        })
             .on('mouseleave',function(d){
                  d3.select('.tooltip').style('visibility','hidden');
@@ -211,8 +213,10 @@ function Geoplot(){
                    .style('opacity',defaultOpa)
 
             })
+            .on('click',function(d){
+                  _zoom(d,_mapData,_geoData,mouse);
+            })
 
-         
         countryEnter.merge(countryUpdate)
 	        .attr('transform',function(d){
 	        	if(!map.get(d.key)){
@@ -344,9 +348,11 @@ function Geoplot(){
 
             })
             .on('mouseleave',function(d){
+
             	d3.select(this).style('opacity','0.2')
             	  .style('fill',mainCol)
             	  .style('stroke',mainCol);
+
             	d3.selectAll('.segment').style('opacity',defaultOpa)
             	  .style('fill',mainCol)
             	  .style('stroke',mainCol);
@@ -354,13 +360,11 @@ function Geoplot(){
 
         //Labels on Legend    
         //labels
-        if(plot.select('.label').size() ===0){
            plot.append('text').attr('class','geo-label')
                         .attr('x',20)
                         .attr('y',280)
                         .style('stroke-width','none')
-                        .text('All causes');
-        }
+                        .text('Hover a cause');
                  
         var labelRadius = R_MAX * 1.025;
         
@@ -433,8 +437,46 @@ function Geoplot(){
             	  .style('fill',mainCol)
             	  .style('stroke',mainCol);
             });
+           
 
 
+            //ZOOM
+            // d3.select('.wrapper').call(d3.zoom().on('zoom',function(){
+            //     d3.select('.wrapper').attr("transform", d3.event.transform)
+            // }))
+
+            // d3.select('body').on('click',function(){
+            //     d3.select('.wrapper').attr("transform", 'translate(0,0)')
+            // })
+
+    }
+
+    function _zoom(data,map,geo){
+        // console.log(data);
+        // console.log(geo);
+        // var matches = map.features.filter(function(d){
+        //     console.log(d.properties.name);
+        //     console.log(data.key)
+        //     return d.properties.name == data.key;
+        // });
+
+        var matches = geo.filter(function(d){return d.country == data.key})
+        if(matches){
+          x = matches[0].long
+          y = matches[0].lat
+          k = 2
+        } else{
+          x = plotW/2
+          y = plotH/2
+          k = 1
+        }
+
+        console.log(matches)
+
+        // d3.select('.wrapper')
+        //   .attr('transform','translate('+ plotW/2 + ','+ plotH/2 + ')scale('
+        //     + k + ')translate(' + (-x) + ',' + (-y) + ')')
+        //   .style('stroke-width', 1.5/k +'px')
 
     }
 

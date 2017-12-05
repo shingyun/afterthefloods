@@ -15,10 +15,17 @@
     <div class = 'cover'>
       <h1 class = 'headline'>After The Floods</h1>
       <p class = 'subtitle'>What caused the water disasters around the world?</p>
+    </div>
+    <div class = 'bubble-area'>
+      <div class = 'chart-title' id = 'chart-title-bubble'>Causes Overview</div>
       <div class = 'bubble' id = 'bubble'></div>
     </div>
     <div class = 'flow-chart-area'>
       <div class = 'chart-title' id = 'chart-title-timeline'>Causes and Impact Over 30 Years</div>
+      <div class = 'legend-graphic'>
+          <img src='media/flow_legend.svg'>
+          <p class = 'caption'>Total selected impact by year</p>
+      </div>
       <div class = 'plot' id = 'plot1'></div>
       <div class = 'dropdown' id = 'dropdown-timeline'>
          <p class = 'select-text'>Select an impact</p>
@@ -36,8 +43,11 @@
 
     <div class = 'map-area'>
       <div class = 'chart-title' id = 'chart-title-map'>Causes and Impact Across The World</div>
-      <div class = 'tooltip'>
+      <div class = 'legend-graphic'>
+          <img src='media/geo_legend.svg'>
+          <p class = 'caption'>Total selected impact by country</p>
       </div>
+      <div class = 'tooltip'></div>
       <div class = 'geo-plot' id = 'geo-plot'></div>
       <div class = 'dropdown' id = 'dropdown-map'>
           <p class = 'select-text'>Select an impact</p>
@@ -52,21 +62,17 @@
       </div>
     </div>
     <div class = 'viewpoints'>
+      <div class = 'viewpoint' id = 'point0'></div>
       <div class = 'viewpoint' id = 'point1'></div>
       <div class = 'viewpoint' id = 'point2'></div>
       <div class = 'viewpoint' id = 'point3'></div>
     </div>
 
   
-
-<!-- <script src="d3.js"></script> -->
 <script src="Bubble.js"></script>
 <script src="radialBarChart.js"></script>>
-<!-- <script src="Mouse.js"></script> -->
 <script src="Plot.js"></script>
 <script src="Geoplot.js"></script>
-<!-- <script src="Scatterplot.js"></script>
-<script src="ScatterplotGraphic.js"></script> -->
 <script src="scriptMain.js"></script>
 
 </body>

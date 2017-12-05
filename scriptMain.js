@@ -36,12 +36,6 @@ var causeCount = ['Heavy Rain','Torrential Rain','Tropical Cyclone','Monsoon Rai
     causeDuration = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
     causeAffected = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
 
-// var formatCount = d3.format(',')
-//     formatDeath = d3.format(',') 
-//     formatDisplaced = d3.format(',') 
-//     formatDuration = d3.format(',') 
-//     formatAffected = d3.format(',') 
-
 var drawCount, drawDeath, drawDisplaced, drawDuration, drawAffected;
 
 var bubble, scatterplot
@@ -60,12 +54,21 @@ d3.select('.cover')
   .attr('width',screenW);
 
 // //Click and change views
-d3.select('#point1')
+d3.select('#point0')
   .on('click',function(){
     d3.selectAll('.viewpoint').style('opacity',defaultOpa);
     d3.select(this).style('opacity',1);
     $('html,body').animate({
         scrollTop: $(".cover").offset().top},
+        'slow');
+  })
+
+d3.select('#point1')
+  .on('click',function(){
+    d3.selectAll('.viewpoint').style('opacity',defaultOpa);
+    d3.select(this).style('opacity',1);
+    $('html,body').animate({
+        scrollTop: $(".bubble-area").offset().top},
         'slow');
   })
 

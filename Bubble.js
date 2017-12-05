@@ -8,7 +8,7 @@ function Bubble(){
     	           selection.append('svg'):selection.select('svg');
 
     	plot.attr('width',screenW)
-		    .attr('height',screenH-100)
+		    .attr('height',screenH-50)
 		    .append('g')
 		    .attr('transform','translate(50,50)');
 
@@ -30,13 +30,26 @@ function Bubble(){
 	        .domain(['Monsoon Rain','Tropical Cyclone','Torrential Rain','Heavy Rain','Dam or Levee Related','Snowmelt','Rain and Snowmelt','Ice Related','Other'])
 	        .range([200,700]);
 
-        //append g for each cause
-        var nodes = plot
+      //append g for each cause
+      var nodes = plot
             .selectAll('.nodes')
             .data(floodByCause)
             .enter()
             .append('g')
-            .attr('class','nodes');
+            .attr('class','nodes')
+            .on('mouseenter',function(d){
+                  d3.selectAll('.node-circle')
+                    .style('fill',mainCol)
+                    .style('opacity',0.35)
+                  d3.select(this)
+                    .select('circle')
+                    .style('fill',highlightCol)
+                    .style('opacity',0.8)
+                  d3.select('.des-number')
+                     .text(d.value)
+                  d3.select('.des-cause')
+                     .text(d.key)
+              });
 
         //circle under g
  	    var circle = nodes
@@ -55,7 +68,7 @@ function Bubble(){
               })
               .style('opacity',0)
               .transition().duration(1500)
-              .attr('r',function(d){return Math.sqrt(d.value)*2.25 })
+              .attr('r',function(d){return Math.sqrt(d.value)*2.5 })
               .style('opacity',function(d,i){
                  if(d.key === 'Heavy Rain'){
                     return 0.8
@@ -64,23 +77,6 @@ function Bubble(){
                  }
 
               })
-
-        //Mouse enter function
-        d3.selectAll('.node-circle')
-              .on('mouseenter',function(d){
-                console.log(d);
-                  d3.selectAll('.node-circle')
-                    .style('fill',mainCol)
-                    .style('opacity',0.35)
-                  d3.select(this)
-                    .style('fill',highlightCol)
-                    .style('opacity',0.8)
-                  d3.select('.des-number')
-                     .text(d.value)
-                  d3.select('.des-cause')
-                     .text(d.key)
-
-              });
 
         //labels for causes
         var text = nodes
@@ -99,7 +95,7 @@ function Bubble(){
         var charge = d3.forceManyBody().strength(120),
             forceX = d3.forceX().x(d => scaleX(d.key))
             // forceX = d3.forceX().x(plotW/2)
-            forceY = d3.forceY().y(screenH/3)
+            forceY = d3.forceY().y(screenH/2.5)
             collide = d3.forceCollide().radius(80);
 
         var simulation = d3.forceSimulation(floodByCause)
@@ -113,13 +109,17 @@ function Bubble(){
                 	if(d.key === 'Rain and Snowmelt'){
                       return 'translate('+(d.x-40)+','+(d.y)+')'
                 	} else if(d.key == 'Torrential Rain'){
-                      return 'translate('+(d.x-20)+','+(d.y+20)+')'
+                      return 'translate('+(d.x-40)+','+(d.y+30)+')'
                     } else if(d.key === 'Tropical Cyclone'){
-                      return 'translate('+(d.x-20)+','+(d.y-20)+')'
+                      return 'translate('+(d.x-40)+','+(d.y-10)+')'
                     } else if(d.key === 'Monsoon'){
                       return 'translate('+(d.x+10)+','+(d.y)+')'
+                    } else if(d.key === 'Dam or Levee Related'){
+                      return 'translate('+(d.x+70)+','+(d.y+30)+')'
+                    } else if(d.key === 'Snowmelt'){
+                      return 'translate('+(d.x+30)+','+(d.y+30)+')'
                     } else if(d.key === 'Other'){
-                      return 'translate('+(d.x-70)+','+(d.y+20)+')'
+                      return 'translate('+(d.x-50)+','+(d.y+20)+')'
                     } else{
                 	  return 'translate('+d.x+','+d.y+')'
                 	}
@@ -133,19 +133,19 @@ function Bubble(){
         text.append('text')
             .attr('class','des-number')
             .attr('x',800)
-            .attr('y',150)
+            .attr('y',250)
             .text('2779');
 
         text.append('text')
             .attr('class','des-text')
             .attr('x',800)
-            .attr('y',180)
+            .attr('y',280)
             .text('floods from 1984-2017') 
 
         text.append('text')
             .attr('class','des-cause')
             .attr('x',800)
-            .attr('y',210)
+            .attr('y',310)
             .text('Heavy Rain')
 
 

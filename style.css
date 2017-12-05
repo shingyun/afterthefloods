@@ -13,12 +13,17 @@ body {
 
 }
 
+.cover{
+    min-height: 600px;
+}
+
 h1{ 
     font-size: 50px;
     padding-left: 60px; 
     padding-top: 70px;
 	color: #58A5C0;
 }
+
 
 .subtitle{
 	font-size: 18px;
@@ -37,6 +42,7 @@ h1{
 }
 
 
+
 /*--Bubble---*/
 
 
@@ -46,6 +52,15 @@ h1{
     text-align: center;
 }
 
+#chart-title-bubble{
+    font-size: 20px;
+    color: #58A5C0;
+    padding-top: 50px;
+}
+
+.nodes:hover{
+    cursor: default;
+}
 
 .node-text {
     font-family: 'Courier New', Courier, monospace;
@@ -94,7 +109,7 @@ g.axis-y {
 }
 
 .flow-label, .geo-label{
-	fill: #58A5C0;
+	fill: #C8C8C8;
 }
 
 .number-wrap {
@@ -103,17 +118,32 @@ g.axis-y {
 
 .number-each {
     font-family: 'Courier New', Courier, monospace;
-    fill: white;
+    fill: #c8c8c8;
 	/*transform: rotate(90);*/
+}
 
+/*Legend Image*/
+.legend-graphic{
+    position: absolute;
+    top: 150px;
+    left: 35px;
+    width: 150px;
+    height: 100px;
+}
+
+.legend-graphic img{
+    width: 100px;
+    height: 100px;
+}
+
+.caption{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    color: #c8c8c8;
+    padding-left: 20px;
 }
 
 /*Geoplot*/
-
-.geo-plot{
- /*  height: 600px;*/
-   position: relative;
-}
 
 .legend, .labels:hover{
     cursor: default;
@@ -131,7 +161,7 @@ g.axis-y {
     height: 80px;
     color: #c8c8c8;
     padding-left: 10px;
-    border-left: 2px solid #58A5C0;
+    border-left: 2px solid #FC8B76;
     visibility: hidden;
 }
 
@@ -162,6 +192,7 @@ g.axis-y {
 	width: 160px;
     background-color: #58A5C0;
     color: white;
+    opacity: 0.8;
     padding: 7px 12px;
     font-size: 14px;
     border: none;
@@ -240,11 +271,11 @@ g.axis-y {
 	cursor: pointer;
 }
 
-#point1{
+#point0{
 	opacity: 1
 }
 
-#point2, #point3{
+#point1, #point2, #point3{
     margin-top:5px;
 }
 

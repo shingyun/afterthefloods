@@ -123,18 +123,21 @@ function Flow(){
 	        .call(axisX);
 
 	    yAxis.classed('axis',true)
-	        .attr('transform','translate(200,0)')
+	        .attr('transform','translate(190,0)')
 	        .transition().duration(500)
 	        .call(axisCause);
+        
+        //remove previous data
+        d3.select('.flow-label').remove();
+	    d3.selectAll('.cause_wrap').remove();
+	    d3.selectAll('.number-wrap').remove();
 
         //labels
-        if(plot.select('.label').size() ===0){
-           plot.append('text').attr('class','flow-label')
-                        .attr('x',125)
+        plot.append('text').attr('class','flow-label')
+                        .attr('x',115)
                         .attr('y',350)
                         .style('stroke-width','none')
                         .text('All causes');
-        }
 
 	    //Line and area generator
 	    line = d3.line()
@@ -147,10 +150,6 @@ function Flow(){
 	        .y0(d => 170)//?????
 	        .y1(d => scaleValue(d.value))
 	        .curve(d3.curveCatmullRom);
-
-        //remove previous data
-	    d3.selectAll('.cause_wrap').remove();
-	    d3.selectAll('.number-wrap').remove();
 
 	    //plot 9 gs for causes 
 	    causeUpdate = plot
