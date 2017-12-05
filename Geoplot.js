@@ -59,7 +59,7 @@ function Geoplot(){
 	        .scale(210);
 
 	    data = data.filter(function(d){return d.country && d.cause_1})
-
+        console.log(data);
 	    //nest the data by cause and month/year
 	    floodByCountry = d3.nest().key(function(d){
 	           if(!d.country){ return ;

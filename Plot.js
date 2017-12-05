@@ -80,8 +80,6 @@ function Flow(){
 	       })
 	       processedData.push(match);
 	    })
-
-	    // console.log(processedData);
 	  
 	    //Set scale
 	    scaleX = d3.scaleLinear()

@@ -20,17 +20,36 @@ body {
 h1{ 
     font-size: 50px;
     padding-left: 60px; 
-    padding-top: 70px;
+    padding-top: 150px;
 	color: #58A5C0;
 }
 
 
 .subtitle{
-	font-size: 18px;
+	font-size: 20px;
     font-weight: normal;
 	color: #58A5C0;
 	padding-left: 60px; 
 	padding-bottom: 20px;
+}
+
+.author{
+    color: #A1ADB7;
+    padding-left: 60px;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+.author a, .intro a{
+    color: #FC8B76;
+    opacity: 0.8;
+}
+
+.intro{
+    color: #A1ADB7;
+    padding-left: 60px;
+    width: 50%;
+    line-height: 150%;
 }
 
 .chart-title{

@@ -90,6 +90,32 @@ d3.select('#point3')
         'slow');
   })
 
+//Viewpoint color changes on scroll
+var bubblePosition = $('.bubble-area').position().top;
+var flowPosition = $('.flow-chart-area').position().top;
+var mapPosition = $('.map-area').position().top;
+
+$(function() {
+   $(window).scroll(function () {
+      if ($(this).scrollTop() < bubblePosition){
+         d3.selectAll('.viewpoint').style('opacity',defaultOpa);
+         d3.select('#point0').style('opacity',1);
+      }
+      if ($(this).scrollTop() > bubblePosition && $(this).scrollTop() < flowPosition) {
+         d3.selectAll('.viewpoint').style('opacity',defaultOpa);
+         d3.select('#point1').style('opacity',1);
+      }
+      if ($(this).scrollTop() > flowPosition && $(this).scrollTop() < mapPosition) {
+         d3.selectAll('.viewpoint').style('opacity',defaultOpa);
+         d3.select('#point2').style('opacity',1);
+      }
+      if ($(this).scrollTop() > mapPosition) {
+         d3.selectAll('.viewpoint').style('opacity',defaultOpa);
+         d3.select('#point3').style('opacity',1);
+      }
+   });
+});
+
 
 //Dropdown control
 d3.selectAll('.dropdown')
