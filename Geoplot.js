@@ -255,8 +255,8 @@ function Geoplot(){
             .attr('transform','translate(0,0)')
             .each(function(d) { d.outerRadius = 0; })
             .style('fill', mainCol)
-            .style('stroke-width','1.5px')
-            .style('stroke',mainCol)
+            .style('stroke-width','0px')
+            // .style('stroke',mainCol)
             .style('opacity',0.35)
 
         radialBarEnter.merge(radialBarUpdate)
@@ -330,7 +330,7 @@ function Geoplot(){
             .classed('seg-legend',true)
             .attr('d',arcLegend)
             .style('fill', mainCol)
-            .style('stroke-width','1.5px')
+            .style('stroke-width','0.5px')
             .style('stroke',mainCol)
             .style('opacity','0.2')
             .on('mouseenter',function(d){
@@ -361,7 +361,7 @@ function Geoplot(){
         //Labels on Legend    
         //labels
            plot.append('text').attr('class','geo-label')
-                        .attr('x',20)
+                        .attr('x',10)
                         .attr('y',280)
                         .style('stroke-width','none')
                         .text('Hover a cause');

@@ -56,8 +56,6 @@ d3.select('.cover')
 // //Click and change views
 d3.select('#point0')
   .on('click',function(){
-    d3.selectAll('.viewpoint').style('opacity',defaultOpa);
-    d3.select(this).style('opacity',1);
     $('html,body').animate({
         scrollTop: $(".cover").offset().top},
         'slow');
@@ -65,8 +63,6 @@ d3.select('#point0')
 
 d3.select('#point1')
   .on('click',function(){
-    d3.selectAll('.viewpoint').style('opacity',defaultOpa);
-    d3.select(this).style('opacity',1);
     $('html,body').animate({
         scrollTop: $(".bubble-area").offset().top},
         'slow');
@@ -74,8 +70,6 @@ d3.select('#point1')
 
 d3.select('#point2')
   .on('click',function(){
-    d3.selectAll('.viewpoint').style('opacity',defaultOpa);
-    d3.select(this).style('opacity',1);
     $('html,body').animate({
         scrollTop: $(".flow-chart-area").offset().top},
         'slow');
@@ -83,8 +77,6 @@ d3.select('#point2')
 
 d3.select('#point3')
   .on('click',function(){
-    d3.selectAll('.viewpoint').style('opacity',defaultOpa);
-    d3.select(this).style('opacity',1);
     $('html,body').animate({
         scrollTop: $(".map-area").offset().top},
         'slow');
@@ -101,7 +93,7 @@ $(function() {
          d3.selectAll('.viewpoint').style('opacity',defaultOpa);
          d3.select('#point0').style('opacity',1);
       }
-      if ($(this).scrollTop() > bubblePosition && $(this).scrollTop() < flowPosition) {
+      if ($(this).scrollTop() > (bubblePosition -50) && $(this).scrollTop() < flowPosition) {
          d3.selectAll('.viewpoint').style('opacity',defaultOpa);
          d3.select('#point1').style('opacity',1);
       }
