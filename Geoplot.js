@@ -43,6 +43,8 @@ function Geoplot(){
 
     var R_MAX = 60, R_MAX_LEGEND = 140;
 
+    var k = 1;
+
     function exports(selection){
         
     	var data = selection.datum() || [];
@@ -132,16 +134,17 @@ function Geoplot(){
 
  	    map = d3.map(geoArray, function(d){return d.country})
 
+        //The wrapper include map and rose chart
         var wrapper = plot.select('.wrapper').size() ===0?
                 plot.append('g').attr('class','wrapper'):plot.select('.wrapper');
 
 
         //Only plot the map one time
     	var mapPlot = wrapper.select('.mapData').size() ===0?
-    	           wrapper.append('g').attr('class','mapData'):plot.select('.mapData');
+    	           wrapper.append('g').attr('class','mapData'):plot.select('.mapData')
 
         //Plot the map
-	    mapPlot.attr('transform','translate(0,0)')
+	    mapPlot
 	       .selectAll('.countries')
 	       .data(_mapData.features)
 	       .enter()
@@ -254,7 +257,6 @@ function Geoplot(){
             .each(function(d) { d.outerRadius = 0; })
             .style('fill', mainCol)
             .style('stroke-width','0px')
-            // .style('stroke',mainCol)
             .style('opacity',0.35)
 
         radialBarEnter.merge(radialBarUpdate)
@@ -269,36 +271,44 @@ function Geoplot(){
         radialBarUpdate.exit().remove();
        
         //Interaction of segment
-        // countryEnter.selectAll('.segment')
-        //     .on('mouseenter',function(d){
+        countryEnter.selectAll('.segment')
+            .on('mouseenter',function(d){
 
-        //     	// d3.select(this).style('opacity',hightlightOpa)
-        //     	// var no_space = d.key.split(' ').join('')
-        //      //    d3.select('.allCountries')
-        //     	//   .selectAll('.segment.'+no_space)
-        //      //      .style('opacity',hightlightOpa)
-        //      //      .style('fill', highlightCol)
-        //      //      .style('stroke',highlightCol);
-        //     	// d3.selectAll('.legend')
-        //     	//   .selectAll('.seg-legend.'+no_space)
-        //     	//   .style('opacity',hightlightOpa)
-        //     	//   .style('fill', highlightCol)
-        //      //      .style('stroke',highlightCol);;
-        //     })
-        //     .on('mouseleave',function(d){
-        //     	// d3.select(this).style('opacity',0.2);
-        //         //Hight all cause
-        //     	// d3.selectAll('.segment')
-        //     	//   .style('opacity',0.2)                  
-        //     	//   .style('fill', mainCol)
-        //      //      .style('stroke',mainCol);
-        //     	// d3.selectAll('.seg-legend').style('opacity',0.2)
-        //     	//   .style('fill', mainCol)
-        //      //      .style('stroke',mainCol);
-        //     })
-        //     .on('click',function(d){
-        //     	console.log(d);
-            // }) 
+                d3.select(this).style('stroke-width',2/k)
+                  .style('stroke','white')
+
+            	// d3.select(this).style('opacity',hightlightOpa)
+            	var no_space = d.key.split(' ').join('')
+             //    d3.select('.allCountries')
+            	//   .selectAll('.segment.'+no_space)
+             //      .style('opacity',hightlightOpa)
+             //      .style('fill', highlightCol)
+             //      .style('stroke',highlightCol);
+            	d3.selectAll('.legend')
+            	  .selectAll('.seg-legend.'+no_space)
+            	  .style('opacity',hightlightOpa)
+            	  .style('fill', highlightCol)
+                  .style('stroke','white')
+                  .style('stroke-width',1.5);
+            })
+            .on('mouseleave',function(d){
+
+                d3.select(this).style('stroke-width','0px')
+                  .style('stroke','none');
+
+            	// d3.select(this).style('opacity',0.2);
+                //Hight all cause
+            	// d3.selectAll('.segment')
+            	//   .style('opacity',0.2)                  
+            	//   .style('fill', mainCol)
+             //      .style('stroke',mainCol);
+            	d3.selectAll('.seg-legend').style('opacity',0.2)
+            	  .style('fill', mainCol)
+                  .style('stroke',mainCol)
+                  .style('stroke-width',0.5)
+
+            })
+
        
         //Plot the interactive legend
         scaleLegend = d3.scaleLinear()
@@ -445,12 +455,12 @@ function Geoplot(){
             	  .style('fill',mainCol)
             	  .style('stroke',mainCol);
             });
-           
 
             //ZOOM
             d3.select('.wrapper').call(d3.zoom().on('zoom',function(){
                 d3.select('.wrapper').attr("transform", d3.event.transform)
                 d3.select('.setMap').style('fill',highlightCol);
+                k = d3.zoomTransform(this).k;
             }))
             
             //Reset the map
@@ -458,7 +468,6 @@ function Geoplot(){
                 d3.select('.wrapper').attr("transform", 'translate(0,0)')
                 d3.select('.setMap').style('fill','#C8C8C8');
             })
-
 
     }
 

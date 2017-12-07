@@ -36,17 +36,15 @@ var causeCount = ['Heavy Rain','Torrential Rain','Tropical Cyclone','Monsoon Rai
     causeDuration = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
     causeAffected = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
 
-var drawCount, drawDeath, drawDisplaced, drawDuration, drawAffected;
-
-var bubble, scatterplot
-
-var mouseInteraction;
+// var drawCount, drawDeath, drawDisplaced, drawDuration, drawAffected;
 
 var yAdjustment = 157;
 
 var count = true;
+
     //'#C1AB42' '#92a6ed'  '#C5A2D7'
 var mainCol = '#58A5C0', highlightCol = '#FC8B76', bgCol = '#0D1E25';
+
 var defaultOpa = 0.35, hightlightOpa = 0.8;
 
 d3.select('.cover')
@@ -284,8 +282,6 @@ function dataloaded(err, data, geo, map) {
         d3.select('#dropbtn-map')
           .html('Floods (count)');
 
-        // d3.select('.legend').remove();
-
         count = true;
 
         geoCount = Geoplot()
@@ -297,6 +293,8 @@ function dataloaded(err, data, geo, map) {
           .datum(data)
           .call(geoCount);
 
+        d3.select('.wrapper').attr("transform", 'translate(0,0)')
+
       })
 
 
@@ -305,8 +303,6 @@ function dataloaded(err, data, geo, map) {
 
         d3.select('#dropbtn-map')
           .html('Death (people)');
-
-        // d3.select('.legend').remove();
 
         count = false;
 
@@ -320,6 +316,7 @@ function dataloaded(err, data, geo, map) {
           .datum(data)
           .call(geoDeath);
 
+        d3.select('.wrapper').attr("transform", 'translate(0,0)')
       })
 
 
@@ -328,8 +325,6 @@ function dataloaded(err, data, geo, map) {
 
         d3.select('#dropbtn-map')
           .html('Displaced (people)');
-
-        // d3.select('.legend').remove();
 
         count = false;
 
@@ -343,6 +338,8 @@ function dataloaded(err, data, geo, map) {
           .datum(data)
           .call(geoDisplaced);
 
+        d3.select('.wrapper').attr("transform", 'translate(0,0)')
+
       })
 
     d3.select('#geo-button3')
@@ -350,8 +347,6 @@ function dataloaded(err, data, geo, map) {
 
         d3.select('#dropbtn-map')
           .html('Duration (days)');
-
-        // d3.select('.legend').remove();
 
         count = false;
 
@@ -366,7 +361,8 @@ function dataloaded(err, data, geo, map) {
         d3.select('#geo-plot')
           .datum(data)
           .call(geoDuration);
-
+        
+        d3.select('.wrapper').attr("transform", 'translate(0,0)')
 
       })
 
@@ -376,8 +372,6 @@ function dataloaded(err, data, geo, map) {
 
         d3.select('#dropbtn-map')
           .html('Affected area (sq km)');
-        
-        // d3.select('.legend').remove();
         
         count = false;
 
@@ -390,7 +384,9 @@ function dataloaded(err, data, geo, map) {
         d3.select('#geo-plot')
           .datum(data)
           .call(geoAffected);
-
+       
+        d3.select('.wrapper').attr("transform", 'translate(0,0)')
+      
       })
 
 
