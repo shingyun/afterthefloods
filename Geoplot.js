@@ -59,7 +59,7 @@ function Geoplot(){
 	        .scale(210);
 
 	    data = data.filter(function(d){return d.country && d.cause_1})
-        console.log(data);
+
 	    //nest the data by cause and month/year
 	    floodByCountry = d3.nest().key(function(d){
 	           if(!d.country){ return ;
@@ -154,6 +154,7 @@ function Geoplot(){
 	       .style('opacity',0.3);
 
         //Remove the geo plot and paste again later
+        d3.select('.setMap').remove();
         d3.select('.geo-label').remove();
 	    d3.selectAll('.allCountries').remove();
 
@@ -212,9 +213,6 @@ function Geoplot(){
                    .style('stroke',mainCol)
                    .style('opacity',defaultOpa)
 
-            })
-            .on('click',function(d){
-                  _zoom(d,_mapData,_geoData,mouse);
             })
 
         countryEnter.merge(countryUpdate)
@@ -315,7 +313,7 @@ function Geoplot(){
     	var legendPlot = plot.select('.legend').size() ===0?
     	           plot.append('g')
     	               .attr('class','legend')
-    	               .attr('transform','translate(150,375)')
+    	               .attr('transform','translate(140,380)')
     	               .selectAll('.seg-legend')
                        .data(legendData):
     	               plot.selectAll('.seg-legend');
@@ -358,20 +356,30 @@ function Geoplot(){
             	  .style('stroke',mainCol);
             });
 
-        //Labels on Legend    
+        
+        //Reset the map text
+            plot.append('text')
+                .attr('class','setMap')
+                .attr('x',5)
+                .attr('y',230)
+                .style('stroke-width','none')
+                .text('Reset the map'); 
+
+        //Labels on Legend   
         //labels
-           plot.append('text').attr('class','geo-label')
-                        .attr('x',10)
-                        .attr('y',280)
-                        .style('stroke-width','none')
-                        .text('Hover a cause');
+        plot.append('text')
+            .attr('class','geo-label')
+            .attr('x',5)
+            .attr('y',300)
+            .style('stroke-width','none')
+            .text('Hover a cause');
                  
         var labelRadius = R_MAX * 1.025;
         
         var labelPlot = plot.select('.labels').size() ===0?
     	    plot.append('g')
                 .attr('class','labels')
-                .attr('transform','translate(150,375)rotate(-65)')
+                .attr('transform','translate(140,380)rotate(-65)')
                 .selectAll('.seg-label')
                 .data(legendData):
     	        plot.selectAll('.seg-label');
@@ -439,44 +447,18 @@ function Geoplot(){
             });
            
 
-
             //ZOOM
-            // d3.select('.wrapper').call(d3.zoom().on('zoom',function(){
-            //     d3.select('.wrapper').attr("transform", d3.event.transform)
-            // }))
+            d3.select('.wrapper').call(d3.zoom().on('zoom',function(){
+                d3.select('.wrapper').attr("transform", d3.event.transform)
+                d3.select('.setMap').style('fill',highlightCol);
+            }))
+            
+            //Reset the map
+            d3.select('.setMap').on('click',function(){
+                d3.select('.wrapper').attr("transform", 'translate(0,0)')
+                d3.select('.setMap').style('fill','#C8C8C8');
+            })
 
-            // d3.select('body').on('click',function(){
-            //     d3.select('.wrapper').attr("transform", 'translate(0,0)')
-            // })
-
-    }
-
-    function _zoom(data,map,geo){
-        // console.log(data);
-        // console.log(geo);
-        // var matches = map.features.filter(function(d){
-        //     console.log(d.properties.name);
-        //     console.log(data.key)
-        //     return d.properties.name == data.key;
-        // });
-
-        var matches = geo.filter(function(d){return d.country == data.key})
-        if(matches){
-          x = matches[0].long
-          y = matches[0].lat
-          k = 2
-        } else{
-          x = plotW/2
-          y = plotH/2
-          k = 1
-        }
-
-        console.log(matches)
-
-        // d3.select('.wrapper')
-        //   .attr('transform','translate('+ plotW/2 + ','+ plotH/2 + ')scale('
-        //     + k + ')translate(' + (-x) + ',' + (-y) + ')')
-        //   .style('stroke-width', 1.5/k +'px')
 
     }
 

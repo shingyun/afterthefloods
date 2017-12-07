@@ -93,7 +93,7 @@ function Flow(){
 
 	    scaleCause = d3.scaleBand()
 	        .domain(_cause)
-	        .range([375,575]);
+	        .range([390,590]);
 
 	    //Set axis
 	    axisX = d3.axisBottom()
@@ -106,8 +106,7 @@ function Flow(){
 	        });
 
 	    axisCause = d3.axisLeft()
-	        .scale(scaleCause)
-	        // .tickSize(-1100);
+	        .scale(scaleCause);
 
 	    //Plot axis
         var xAxis = plot.select('.axis-x').size() ===0?
@@ -117,7 +116,7 @@ function Flow(){
     	            plot.append('g').attr('class','axis-y'):plot.select('.axis-y');
 
 	    xAxis.classed('axis',true)
-	        .attr('transform','translate(50,'+570+')')
+	        .attr('transform','translate(50,'+590+')')
 	        .call(axisX);
 
 	    yAxis.classed('axis',true)
@@ -129,11 +128,12 @@ function Flow(){
         d3.select('.flow-label').remove();
 	    d3.selectAll('.cause_wrap').remove();
 	    d3.selectAll('.number-wrap').remove();
+	    d3.selectAll('.notation-wrap').remove();
 
         //labels
         plot.append('text').attr('class','flow-label')
                         .attr('x',115)
-                        .attr('y',350)
+                        .attr('y',365)
                         .style('stroke-width','none')
                         .text('All causes');
 
@@ -163,18 +163,32 @@ function Flow(){
              })
 	        .classed('cause_wrap',true)
 	        .on('mouseenter',function(d){
-                var no_space = d.key.split(' ').join('');
 
+                var no_space = d.key.split(' ').join('');
+               
+                //Show
                 d3.select('.number-wrap.'+no_space)
                   .style('visibility','visible')
                   .style('opacity',0)
                   .transition().duration(1000)
                   .style('opacity',1);
+
+                d3.selectAll('.notation-wrap.'+no_space)
+                  .style('visibility','visible')
+                  .style('opacity',0)
+                  .style('opacity',1);
+                         	
             })      
 	        .on('mouseleave',function(d){
 	        	var no_space = d.key.split(' ').join('');
-                d3.select('.number-wrap.'+no_space)
+
+                //Clear All
+                d3.selectAll('.number-wrap.'+no_space)
                   .style('visibility','hidden');
+
+                d3.selectAll('.notation-wrap.'+no_space)
+                  .style('visibility','hidden'); 
+
 	        });
 
 	    causeEnter
@@ -211,8 +225,11 @@ function Flow(){
 	        .attr('d',area)
 	        .style('stroke','none')
 	        .style('fill', mainCol)
-	        .style('opacity',0.3)
+	        .style('opacity',defaultOpa)
 	        .on('mouseenter',function(d){
+	        	// d3.selectAll('.area')
+	        	//   .style('opacity',defaultOpa)
+	        	//   .style('fill',mainCol);
                 d3.select(this)
                   .style('opacity',hightlightOpa)
                   .style('fill',highlightCol);
@@ -246,22 +263,109 @@ function Flow(){
             .enter()
             .append('text')
             .classed('number-each',true)
+            .attr('transform',function(d){
+            	// console.log(d);
+            	// if(d.key%3==2){
+             //        return 'translate(0,-50)'
+            	// }
+             //    if(d.key%3==0){
+             //    	return 'translate(0,40)'
+             //    }
+             //    if(d.key%3==1){
+             //    	return 'translate(0,-20)'
+             //    }
+                 if(d.key%2==0){
+                 	return 'translate(0,-25)'
+                 }
+                 if(d.key%2==1){
+                 	return 'translate(0, 35)'
+                 }
+            })
             .merge(numberUpdate)
             .attr('x',function(d){ return scaleX(d.key)})
             .attr('y',function(d){ return scaleValue(d.value)-5})
             .style('font-size','11px')
-            .style('text-anchor','middle')
+            .style('text-anchor','start')
             .text(function(d){ 
             	var f = d3.format(',')
             	return f(Math.round(d.value))
             })
-            
+
+
+        notation = plot.selectAll('.notation-wrap')
+            .data(processedData)
+            .enter()
+            .append('g')
+            .attr('class',function(d){
+               var no_space = d.key.split(' ').join('')
+               return no_space;
+             })
+            .classed('notation-wrap',true)
+
+        //plot circle
+	    circle = notation
+	        .append('g')
+            .classed('circle-wrap',true)
+	        .attr('transform',function(d){
+            	return 'translate(50,'+(scaleCause(d.key)-yAdjustment)+')';
+            });
         
-        //ROTATE!!!!!!!????????
-        // d3.selectAll('.number-each')
-        //   .each(function(){
-        //   	d3.select(this).attr('transform','rotate(15)')
-        //   })
+        circleEach = circle.selectAll('.circle-each')
+            .data(function(d){return d.values})
+            .enter()
+            .append('circle')
+            .classed('circle-each',true)
+            .attr('cx',function(d){ return scaleX(d.key)})
+            .attr('cy',function(d){ return scaleValue(d.value)})
+            .attr('r',2)
+            .style('fill','#C8C8C8')
+            .style('opacity',1)
+            .style('stroke','#c8c8c8')
+            .style('stroke-width',0.5);
+
+
+        //Connect line
+        connectline = notation
+	        .append('g')
+            .classed('coline-wrap',true)
+	        .attr('transform',function(d){
+            	return 'translate(50,'+(scaleCause(d.key)-yAdjustment)+')';
+            });
+        
+        connectlineEach = connectline.selectAll('.connectline-each')
+            .data(function(d){return d.values})
+            .enter()
+            .append('line')
+            .classed('coline-each',true)
+            .attr('x1',function(d){ return scaleX(d.key)})
+            .attr('x2',function(d){ return scaleX(d.key)})
+            .attr('y1',function(d){ return scaleValue(d.value)})
+            .attr('y2',function(d){ return scaleValue(d.value)})
+            .transition().duration(100)
+            .attr('y2',function(d){ 
+                // if(d.key%3==2){
+                // 	return scaleValue(d.value)-50
+                // }
+                //   if(d.key%3==0){
+                // 	return scaleValue(d.value)+25
+                // }              
+                //   if(d.key%3==1){
+                // 	return scaleValue(d.value)-20
+                // }   
+                 if(d.key%2==0){
+                 	return scaleValue(d.value)-25
+                 }
+                 if(d.key%2==1){
+                 	return scaleValue(d.value)+20
+                 }       	
+
+            })
+            .style('fill','#C8C8C8')
+            .style('opacity',1)
+            .style('stroke','#c8c8c8')
+            .style('stroke-width',1)
+            .style('stroke-dasharray','1,2');
+        
         
 
         //data exit does not work for now ...
@@ -270,6 +374,7 @@ function Flow(){
 	    areaUpdate.exit().remove();
 	    numberUpdate.exit().remove();
         numberEachUpdate.exit().remove();
+
 
         
     }

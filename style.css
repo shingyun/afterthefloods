@@ -134,6 +134,10 @@ g.axis-y {
 	fill: #C8C8C8;
 }
 
+.notation-wrap{
+    visibility: hidden;
+}
+
 .number-wrap {
     visibility: hidden; 
 }
@@ -141,7 +145,7 @@ g.axis-y {
 .number-each {
     font-family: 'Courier New', Courier, monospace;
     fill: #c8c8c8;
-	/*transform: rotate(90);*/
+	transform: rotate(90);
 }
 
 /*Legend Image*/
@@ -173,6 +177,18 @@ g.axis-y {
 
 .seg-label{
 	fill: white;
+}
+
+.setMap{
+    padding-left: 60px;
+    font-size: 13px;
+    fill: #c8c8c8;
+}
+
+
+.setMap:hover{
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .tooltip{
