@@ -41,7 +41,7 @@ function Geoplot(){
     var mapPath = d3.geoPath()
         .projection(projection);
 
-    var R_MAX = 60, R_MAX_LEGEND = 140;
+    var R_MAX = screenH*0.09, R_MAX_LEGEND = screenH*0.212;//60 140
 
     var k = 1;
 
