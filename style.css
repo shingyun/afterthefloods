@@ -16,7 +16,7 @@ body {
 h1{ 
     font-size: 50px;
     padding-left: 5%; 
-    padding-top: 150px;
+    padding-top: 10%;
 	color: #58A5C0;
 }
 
@@ -54,7 +54,7 @@ h1{
 .chart-title{
     font-size: 20px;
     color: #58A5C0;
-    padding-top: 20px;
+    padding-top: 1.5%;
     padding-left: 5%; 
 
 }
@@ -72,7 +72,7 @@ h1{
 #chart-title-bubble{
     font-size: 20px;
     color: #58A5C0;
-    padding-top: 50px;
+    padding-top: 7%;
 }
 
 .nodes:hover{
@@ -146,7 +146,7 @@ g.axis-y {
 /*Legend Image*/
 .legend-graphic{
     position: absolute;
-    top: 150px;
+    top: 20%;
     left: 3.5%;
     width: 150px;
     height: 100px;
