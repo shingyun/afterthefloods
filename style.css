@@ -11,7 +11,7 @@ body {
 
 }
 
-.cover{
+.cover, .bubble-area, .flow-chart-area, .map-area{
     min-height: 660px;
 }
 
@@ -64,7 +64,6 @@ h1{
 
 
 /*--Bubble---*/
-
 
 .bubble {
     min-height: 400px;
@@ -243,7 +242,7 @@ g.axis-y {
 
 @media (min-height: 670px) and (min-height: 900px) {
   #dropdown-timeline, #dropdown-map{
-    transform: translate(30%,-1300%);
+    transform: translate(30%,-1600%);
   }
 }
 
