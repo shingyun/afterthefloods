@@ -8,7 +8,7 @@ function Bubble(){
     	           selection.append('svg'):selection.select('svg');
 
     	plot.attr('width',screenW)
-		    .attr('height',screenH-50)
+		    .attr('height',screenH)
 		    .append('g')
 		    .attr('transform','translate('+screenW*0.04+','+ screenH*0.757 +')');
 
