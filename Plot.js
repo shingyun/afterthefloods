@@ -8,8 +8,8 @@ function Flow(){
     	var plot = selection.select('svg').size() ===0?
     	           selection.append('svg'):selection.select('svg');
 
-    	plot.attr('width',plotW)
-		    .attr('height',plotH)
+    	plot.attr('width',screenW) //1280
+		    .attr('height',screenH) // 660
 		    .append('g')
 		    .attr('transform','translate(50,50)');
 
@@ -89,11 +89,11 @@ function Flow(){
 
 	    scaleValue = d3.scaleLinear()
 	        .domain([0,_meaScale])
-	        .range([170,0]);//????
+	        .range([screenH*0.257,0]);//170
 
 	    scaleCause = d3.scaleBand()
 	        .domain(_cause)
-	        .range([390,590]);
+	        .range([screenH*0.6,screenH*0.88]);//390,590
 
 	    //Set axis
 	    axisX = d3.axisBottom()
@@ -116,11 +116,11 @@ function Flow(){
     	            plot.append('g').attr('class','axis-y'):plot.select('.axis-y');
 
 	    xAxis.classed('axis',true)
-	        .attr('transform','translate(50,'+590+')')
+	        .attr('transform','translate('+ screenW*0.04 +','+ screenH*0.88 +')')
 	        .call(axisX);
 
 	    yAxis.classed('axis',true)
-	        .attr('transform','translate(190,0)')
+	        .attr('transform','translate('+ screenW*0.15 +',0)')
 	        .transition().duration(500)
 	        .call(axisCause);
         
@@ -132,8 +132,8 @@ function Flow(){
 
         //labels
         plot.append('text').attr('class','flow-label')
-                        .attr('x',115)
-                        .attr('y',365)
+                        .attr('x',screenW*0.089) //115
+                        .attr('y',screenH*0.55) //365
                         .style('stroke-width','none')
                         .text('All causes');
 
@@ -145,7 +145,7 @@ function Flow(){
 
 	    area = d3.area()
 	        .x(d => scaleX(d.key))
-	        .y0(d => 170)//?????
+	        .y0(d => screenH*0.257)//170
 	        .y1(d => scaleValue(d.value))
 	        .curve(d3.curveCatmullRom);
 
@@ -193,7 +193,7 @@ function Flow(){
 
 	    causeEnter
             .merge(causeUpdate)
-	        .attr('transform',d => 'translate(50,'+ (scaleCause(d.key)-yAdjustment)+')'
+	        .attr('transform',d => 'translate('+ screenW*0.04 +','+ (scaleCause(d.key)-yAdjustment)+')'
 	        );
 
 	    //plot line
@@ -253,7 +253,7 @@ function Flow(){
             })
             .classed('number-wrap',true)
 	        .attr('transform',function(d){
-            	return 'translate(50,'+(scaleCause(d.key)-yAdjustment)+')';
+            	return 'translate('+ screenW*0.04 +','+(scaleCause(d.key)-yAdjustment)+')';
             });
         
         numberEachUpdate = numberEnter.selectAll('.number-each')
@@ -307,7 +307,7 @@ function Flow(){
 	        .append('g')
             .classed('circle-wrap',true)
 	        .attr('transform',function(d){
-            	return 'translate(50,'+(scaleCause(d.key)-yAdjustment)+')';
+            	return 'translate('+ screenW*0.04 +','+(scaleCause(d.key)-yAdjustment)+')';
             });
         
         circleEach = circle.selectAll('.circle-each')
@@ -320,7 +320,7 @@ function Flow(){
             .attr('r',2)
             .style('fill','#C8C8C8')
             .style('opacity',1)
-            .style('stroke','#c8c8c8')
+            .style('stroke','#C8C8C8')
             .style('stroke-width',0.5);
 
 
@@ -362,7 +362,7 @@ function Flow(){
             })
             .style('fill','#C8C8C8')
             .style('opacity',1)
-            .style('stroke','#c8c8c8')
+            .style('stroke','#C8C8C8')
             .style('stroke-width',1)
             .style('stroke-dasharray','1,2');
         
