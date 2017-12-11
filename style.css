@@ -243,15 +243,22 @@ g.axis-y {
 
 @media (min-height: 670px) and (min-height: 900px) {
   #dropdown-timeline, #dropdown-map{
-    transform: translate(30%,-1800%);
+    transform: translate(30%,-1600%);
   }
 }
 
 @media (min-height: 901px) and (max-height: 1200px) {
   #dropdown-timeline, #dropdown-map{
-    transform: translate(30%,-2000%);
+    transform: translate(30%,-1800%);
   }
 }
+
+@media (min-height: 1200px) {
+  #dropdown-timeline, #dropdown-map{
+    transform: translate(30%,-2200%);
+  }
+}
+
 
 .dropdown {
     position: relative;
