@@ -1,8 +1,7 @@
-var screenW = $( window ).width();
+var screenW = $( window ).width(),
     screenH = $( window ).height();
 
-var plotW = 1250,
-    plotH = 650;
+console.log('W:',screenW, 'H:',screenH)
 
 var Data_begin = 1984,
     Data_end   = 2017,

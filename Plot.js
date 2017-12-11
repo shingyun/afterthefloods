@@ -11,7 +11,7 @@ function Flow(){
     	plot.attr('width',screenW) //1280
 		    .attr('height',screenH) // 660
 		    .append('g')
-		    .attr('transform','translate(50,50)');
+		    .attr('transform','translate('+screenW*0.04+','+ screenH*0.757 +')');
 
 	    //nest the data by cause and month/year
 	    floodByCause = d3.nest().key(function(d){
@@ -329,7 +329,7 @@ function Flow(){
 	        .append('g')
             .classed('coline-wrap',true)
 	        .attr('transform',function(d){
-            	return 'translate(50,'+(scaleCause(d.key)-yAdjustment)+')';
+            	return 'translate('+screenW*0.04+','+(scaleCause(d.key)-yAdjustment)+')';
             });
         
         connectlineEach = connectline.selectAll('.connectline-each')

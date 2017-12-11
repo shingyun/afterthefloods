@@ -50,14 +50,14 @@ function Geoplot(){
     	var data = selection.datum() || [];
 
     	var plot = selection.select('svg').size() ===0?
-    	           selection.append('svg').attr('width',screenW)
-		                                  .attr('height',screenH)
+    	           selection.append('svg').attr('width',screenW) //1280
+		                                  .attr('height',screenH)  //660
 		                                  .append('g')
-		                                  .attr('transform','translate(50,50)'):
+		                                  .attr('transform','translate('+screenW*0.04+','+ screenH*0.075 +')'):
 		                                  selection.select('svg').select('g');
 
     	// projection
-		projection.fitExtent([[0,0],[plotW,plotH]],_mapData)
+		projection.fitExtent([[0,0],[screenW,screenH]],_mapData)
 	        .scale(210);
 
 	    data = data.filter(function(d){return d.country && d.cause_1})
@@ -221,7 +221,7 @@ function Geoplot(){
         countryEnter.merge(countryUpdate)
 	        .attr('transform',function(d){
 	        	if(!map.get(d.key)){
-	        		return 'translate(-500,-500)'
+	        		return 'translate(-5000,-5000)'
 	        	} else{
 	        		return 'translate('+ projection(map.get(d.key).location)[0] +','+projection(map.get(d.key).location)[1]+')';
 	        	}
@@ -323,7 +323,7 @@ function Geoplot(){
     	var legendPlot = plot.select('.legend').size() ===0?
     	           plot.append('g')
     	               .attr('class','legend')
-    	               .attr('transform','translate(140,380)')
+    	               .attr('transform','translate('+ screenW*0.109 +','+screenH*0.575+')')//140,380
     	               .selectAll('.seg-legend')
                        .data(legendData):
     	               plot.selectAll('.seg-legend');
@@ -389,7 +389,7 @@ function Geoplot(){
         var labelPlot = plot.select('.labels').size() ===0?
     	    plot.append('g')
                 .attr('class','labels')
-                .attr('transform','translate(140,380)rotate(-65)')
+                .attr('transform','translate('+ screenW*0.109 +','+screenH*0.575+')rotate(-65)')
                 .selectAll('.seg-label')
                 .data(legendData):
     	        plot.selectAll('.seg-label');
