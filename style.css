@@ -241,7 +241,7 @@ g.axis-y {
     transform: translate(30%,-1100%);
 }
 
-@media (min-height: 670px) and (min-height: 900px) {
+/*@media (min-height: 670px) and (min-height: 900px) {
   #dropdown-timeline, #dropdown-map{
     transform: translate(30%,-1600%);
   }
@@ -255,9 +255,9 @@ g.axis-y {
 
 @media (min-height: 1200px) {
   #dropdown-timeline, #dropdown-map{
-    transform: translate(30%,-2200%);
+    transform: translate(30%,-2000%);
   }
-}
+}*/
 
 
 .dropdown {

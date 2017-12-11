@@ -2,7 +2,7 @@ var screenW = $( window ).width(),
     screenH = $( window ).height();
 
 console.log('W:',screenW, 'H:',screenH)
-console.log('transform')
+console.log('no responsive transform')
 
 var Data_begin = 1984,
     Data_end   = 2017,
