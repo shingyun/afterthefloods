@@ -370,7 +370,7 @@ function Geoplot(){
         //Reset the map text
             plot.append('text')
                 .attr('class','setMap')
-                .attr('x',screenW*0.004)//5
+                .attr('x',screenW*0.01)//5
                 .attr('y',screenH*0.348)//230
                 .style('stroke-width','none')
                 .text('Reset the map'); 
@@ -379,7 +379,7 @@ function Geoplot(){
         //labels
         plot.append('text')
             .attr('class','geo-label')
-            .attr('x',screenW*0.004)//5
+            .attr('x',screenW*0.01)//5
             .attr('y',screenH*0.454)//300
             .style('stroke-width','none')
             .text('Hover a cause');

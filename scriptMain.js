@@ -1,8 +1,7 @@
 var screenW = $( window ).width(),
     screenH = $( window ).height();
 
-console.log('W:',screenW, 'H:',screenH)
-console.log('transform 1-1')
+console.log('no media')
 
 var Data_begin = 1984,
     Data_end   = 2017,
