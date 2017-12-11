@@ -141,13 +141,13 @@ function Flow(){
 	    line = d3.line()
 	        .x(function(d){return scaleX(d.key)})
 	        .y(function(d){return scaleValue(d.value)})
-	        .curve(d3.curveCatmullRom);
+	        .curve(d3.curveMonotoneX);
 
 	    area = d3.area()
 	        .x(d => scaleX(d.key))
 	        .y0(d => screenH*0.257)//170
 	        .y1(d => scaleValue(d.value))
-	        .curve(d3.curveCatmullRom);
+	        .curve(d3.curveMonotoneX);
 
 	    //plot 9 gs for causes 
 	    causeUpdate = plot
