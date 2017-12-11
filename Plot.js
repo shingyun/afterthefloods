@@ -84,8 +84,8 @@ function Flow(){
 	    //Set scale
 	    scaleX = d3.scaleLinear()
 	        .domain([Data_begin,Data_end])
-	        .range([Data_rng_1,Data_rng_2]);
-	        // .range([200,1000]);
+	        .range([screenW*0.117,screenW*0.88]);
+	        //150,1100
 
 	    scaleValue = d3.scaleLinear()
 	        .domain([0,_meaScale])
