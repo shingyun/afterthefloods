@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -34,16 +37,18 @@
           <p class = 'caption'>Total selected impact by year</p>
       </div>
       <div class = 'plot' id = 'plot1'></div>
-      <div class = 'dropdown' id = 'dropdown-timeline'>
-         <p class = 'select-text'>Select an impact</p>
-         <div class = 'dropbtn' id = 'dropbtn-timeline'> Floods (count)</div>
-         <div class='dropdown-content'>
-           <div class = 'button' id = 'button0'>Floods (count)</div>
-           <div class = 'button' id = 'button1'>Death (people)</div>
-           <div class = 'button' id = 'button2'>Displaced (people)</div>
-           <div class = 'button' id = 'button3'>Duration (days)</div>
-           <div class = 'button' id = 'button4'>Affected area (sq km)</div>
-         </div>
+      <div id = 'dropdown-timeline'>
+        <div class = 'dropdown'>
+           <p class = 'select-text'>Select an impact</p>
+           <div class = 'dropbtn' id = 'dropbtn-timeline'> Floods (count)</div>
+           <div class='dropdown-content'>
+             <div class = 'button' id = 'button0'>Floods (count)</div>
+             <div class = 'button' id = 'button1'>Death (people)</div>
+             <div class = 'button' id = 'button2'>Displaced (people)</div>
+             <div class = 'button' id = 'button3'>Duration (days)</div>
+             <div class = 'button' id = 'button4'>Affected area (sq km)</div>
+           </div>
+        </div>
       </div>
       
     </div>
@@ -56,16 +61,18 @@
       </div>
       <div class = 'tooltip'></div>
       <div class = 'geo-plot' id = 'geo-plot'></div>
-      <div class = 'dropdown' id = 'dropdown-map'>
-          <p class = 'select-text'>Select an impact</p>
-          <div class = 'dropbtn' id = 'dropbtn-map'> Floods (count)</div>
-          <div class='dropdown-content'>
-            <div class = 'geo-button' id = 'geo-button0'>Floods (count)</div>
-            <div class = 'geo-button' id = 'geo-button1'>Death (people)</div>
-            <div class = 'geo-button' id = 'geo-button2'>Displaced (people)</div>
-            <div class = 'geo-button' id = 'geo-button3'>Duration (days)</div>
-            <div class = 'geo-button' id = 'geo-button4'>Affected area (sq km)</div>
-          </div>
+      <div id = 'dropdown-map'> 
+        <div class = 'dropdown'>
+            <p class = 'select-text'>Select an impact</p>
+            <div class = 'dropbtn' id = 'dropbtn-map'> Floods (count)</div>
+            <div class='dropdown-content'>
+              <div class = 'geo-button' id = 'geo-button0'>Floods (count)</div>
+              <div class = 'geo-button' id = 'geo-button1'>Death (people)</div>
+              <div class = 'geo-button' id = 'geo-button2'>Displaced (people)</div>
+              <div class = 'geo-button' id = 'geo-button3'>Duration (days)</div>
+              <div class = 'geo-button' id = 'geo-button4'>Affected area (sq km)</div>
+            </div>
+        </div>
       </div>
 
     </div>

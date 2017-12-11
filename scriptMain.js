@@ -35,8 +35,6 @@ var causeCount = ['Heavy Rain','Torrential Rain','Tropical Cyclone','Monsoon Rai
     causeDuration = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
     causeAffected = ['Heavy Rain','Monsoon Rain','Tropical Cyclone','Torrential Rain','Snowmelt','Rain and Snowmelt','Dam or Levee Related','Ice Related','Other']
 
-// var drawCount, drawDeath, drawDisplaced, drawDuration, drawAffected;
-
 var yAdjustment = screenH*0.237;//157
 
 var count = true;
