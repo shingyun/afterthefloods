@@ -58,7 +58,7 @@ function Geoplot(){
 
     	// projection
 		projection.fitExtent([[0,0],[screenW,screenH]],_mapData)
-	        .scale(210);
+	        .scale(screenH*0.318); //210
 
 	    data = data.filter(function(d){return d.country && d.cause_1})
 
@@ -370,8 +370,8 @@ function Geoplot(){
         //Reset the map text
             plot.append('text')
                 .attr('class','setMap')
-                .attr('x',5)
-                .attr('y',230)
+                .attr('x',screenW*0.004)//5
+                .attr('y',screenH*0.348)//230
                 .style('stroke-width','none')
                 .text('Reset the map'); 
 
@@ -379,8 +379,8 @@ function Geoplot(){
         //labels
         plot.append('text')
             .attr('class','geo-label')
-            .attr('x',5)
-            .attr('y',300)
+            .attr('x',screenW*0.004)//5
+            .attr('y',screenH*0.454)//300
             .style('stroke-width','none')
             .text('Hover a cause');
                  

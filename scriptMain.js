@@ -37,7 +37,7 @@ var causeCount = ['Heavy Rain','Torrential Rain','Tropical Cyclone','Monsoon Rai
 
 // var drawCount, drawDeath, drawDisplaced, drawDuration, drawAffected;
 
-var yAdjustment = 157;
+var yAdjustment = screenH*0.237;//157
 
 var count = true;
 
