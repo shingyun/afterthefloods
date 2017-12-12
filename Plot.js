@@ -131,11 +131,11 @@ function Flow(){
 	    d3.selectAll('.notation-wrap').remove();
 
         //labels
-        plot.append('text').attr('class','flow-label')
-                        .attr('x',screenW*0.089) //115
-                        .attr('y',screenH*0.55) //365
-                        .style('stroke-width','none')
-                        .text('All causes');
+        // plot.append('text').attr('class','flow-label')
+        //                 .attr('x',screenW*0.089) //115
+        //                 .attr('y',screenH*0.55) //365
+        //                 .style('stroke-width','none')
+        //                 .text('All causes');
 
 	    //Line and area generator
 	    line = d3.line()

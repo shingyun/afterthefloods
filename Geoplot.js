@@ -323,7 +323,7 @@ function Geoplot(){
     	var legendPlot = plot.select('.legend').size() ===0?
     	           plot.append('g')
     	               .attr('class','legend')
-    	               .attr('transform','translate('+ screenW*0.109 +','+screenH*0.575+')')//140,380
+    	               .attr('transform','translate('+ screenW*0.115 +','+screenH*0.575+')')//140,380
     	               .selectAll('.seg-legend')
                        .data(legendData):
     	               plot.selectAll('.seg-legend');
@@ -371,7 +371,7 @@ function Geoplot(){
             plot.append('text')
                 .attr('class','setMap')
                 .attr('x',screenW*0.01)//5
-                .attr('y',screenH*0.348)//230
+                .attr('y',screenH*0.275)
                 .style('stroke-width','none')
                 .text('Reset the map'); 
 
@@ -382,14 +382,14 @@ function Geoplot(){
             .attr('x',screenW*0.01)//5
             .attr('y',screenH*0.454)//300
             .style('stroke-width','none')
-            .text('Hover a cause');
+            .text('Select a cause');
                  
         var labelRadius = R_MAX * 1.025;
         
         var labelPlot = plot.select('.labels').size() ===0?
     	    plot.append('g')
                 .attr('class','labels')
-                .attr('transform','translate('+ screenW*0.109 +','+screenH*0.575+')rotate(-65)')
+                .attr('transform','translate('+ screenW*0.115 +','+screenH*0.575+')rotate(-65)')
                 .selectAll('.seg-label')
                 .data(legendData):
     	        plot.selectAll('.seg-label');
