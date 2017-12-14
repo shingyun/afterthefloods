@@ -38,7 +38,7 @@ function Bubble(){
             .append('g')
             .attr('class','nodes')
             .on('mouseenter',function(d){
-                  d3.selectAll('.node-circle')
+                  nodes.selectAll('.node-circle')
                     .style('fill',mainCol)
                     .style('opacity',0.35)
                   d3.select(this)

@@ -465,6 +465,7 @@ function Geoplot(){
             
             //Reset the map
             d3.select('.setMap').on('click',function(){
+                k = 1;
                 d3.select('.wrapper').attr("transform", 'translate(0,0)')
                 d3.select('.setMap').style('fill','#C8C8C8');
             })
