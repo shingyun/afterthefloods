@@ -39,15 +39,18 @@ function Bubble(){
             .attr('class','nodes')
             .on('mouseenter',function(d){
                   nodes.selectAll('.node-circle')
+                    .transition().duration(250)
                     .style('fill',mainCol)
                     .style('opacity',0.35)
                   d3.select(this)
                     .select('circle')
+                    .style('fill',mainCol)
+                    .transition().duration(250)
                     .style('fill',highlightCol)
                     .style('opacity',0.8)
-                  d3.select('.des-number')
+                  text.select('.des-number')
                      .text(d.value)
-                  d3.select('.des-cause')
+                  text.select('.des-cause')
                      .text(d.key)
               });
 
@@ -75,7 +78,6 @@ function Bubble(){
                  } else {
                     return 0.35
                  }
-
               })
 
         //labels for causes

@@ -197,7 +197,7 @@ function Geoplot(){
                         return d.key + ': ' + f(Math.round(d.value));
                     })
                 
-                //Hight causes of a country
+                //Highlight causes of a country
                 d3.select(this)
                   .selectAll('.segment')
                   .style('fill',highlightCol)
@@ -434,7 +434,7 @@ function Geoplot(){
                   .selectAll('.seg-legend.'+no_space)
                   .style('opacity',hightlightOpa)
                   .style('fill',highlightCol)
-                  .style('stroke',highlightCol);
+                  .style('stroke',highlightCol);    
 
             	d3.select('.allCountries')
             	  .selectAll('.segment.'+no_space)

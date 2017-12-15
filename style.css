@@ -131,10 +131,12 @@ g.axis-y {
 
 .notation-wrap{
     visibility: hidden;
+    opacity: 0;
 }
 
 .number-wrap {
     visibility: hidden; 
+    opacity: 0;
 }
 
 .number-each {

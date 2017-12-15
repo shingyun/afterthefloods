@@ -165,6 +165,12 @@ function Flow(){
 	        .on('mouseenter',function(d){
 
                 var no_space = d.key.split(' ').join('');
+
+                d3.selectAll('.number-wrap')
+                  .style('visibility','hidden');
+
+                d3.selectAll('.notation-wrap')
+                  .style('visibility','hidden');
                
                 //Show
                 d3.select('.number-wrap.'+no_space)
@@ -176,20 +182,10 @@ function Flow(){
                 d3.selectAll('.notation-wrap.'+no_space)
                   .style('visibility','visible')
                   .style('opacity',0)
+                  .transition().duration(500)
                   .style('opacity',1);
                          	
-            })      
-	        .on('mouseleave',function(d){
-	        	var no_space = d.key.split(' ').join('');
-
-                //Clear All
-                d3.selectAll('.number-wrap.'+no_space)
-                  .style('visibility','hidden');
-
-                d3.selectAll('.notation-wrap.'+no_space)
-                  .style('visibility','hidden'); 
-
-	        });
+            });
 
 	    causeEnter
             .merge(causeUpdate)
@@ -227,17 +223,15 @@ function Flow(){
 	        .style('fill', mainCol)
 	        .style('opacity',defaultOpa)
 	        .on('mouseenter',function(d){
-	        	// d3.selectAll('.area')
-	        	//   .style('opacity',defaultOpa)
-	        	//   .style('fill',mainCol);
-                d3.select(this)
-                  .style('opacity',hightlightOpa)
-                  .style('fill',highlightCol);
-	        })
-	        .on('mouseleave',function(d){
-	        	d3.select(this)
+                d3.selectAll('.area')
+                  .transition().duration(500)
 	        	  .style('opacity',defaultOpa)
 	        	  .style('fill',mainCol);
+
+                d3.select(this)
+                  .transition().duration(500)
+                  .style('opacity',hightlightOpa)
+                  .style('fill',highlightCol);
 	        });
 
 	    //plot text
@@ -264,16 +258,6 @@ function Flow(){
             .append('text')
             .classed('number-each',true)
             .attr('transform',function(d){
-            	// console.log(d);
-            	// if(d.key%3==2){
-             //        return 'translate(0,-50)'
-            	// }
-             //    if(d.key%3==0){
-             //    	return 'translate(0,40)'
-             //    }
-             //    if(d.key%3==1){
-             //    	return 'translate(0,-20)'
-             //    }
                  if(d.key%2==0){
                  	return 'translate(0,-25)'
                  }
@@ -342,23 +326,13 @@ function Flow(){
             .attr('y1',function(d){ return scaleValue(d.value)})
             .attr('y2',function(d){ return scaleValue(d.value)})
             .transition().duration(100)
-            .attr('y2',function(d){ 
-                // if(d.key%3==2){
-                // 	return scaleValue(d.value)-50
-                // }
-                //   if(d.key%3==0){
-                // 	return scaleValue(d.value)+25
-                // }              
-                //   if(d.key%3==1){
-                // 	return scaleValue(d.value)-20
-                // }   
+            .attr('y2',function(d){  
                  if(d.key%2==0){
                  	return scaleValue(d.value)-25
                  }
                  if(d.key%2==1){
                  	return scaleValue(d.value)+20
                  }       	
-
             })
             .style('fill','#C8C8C8')
             .style('opacity',1)
