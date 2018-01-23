@@ -16,11 +16,11 @@ var MAX_COUNT = 219/2,
     MAX_DURATION = 419*3,
     MAX_AFFECTED = 4814280*2.5;
 
-var GEO_MAX_COUNT = 90;
-    GEO_MAX_DEATH = 160000/4,
-    GEO_MAX_DISPLACED = 40000000/1.5,
-    GEO_MAX_DURATION = 419*3,
-    GEO_MAX_AFFECTED = 4814280*3;
+var GEO_MAX_COUNT = Math.sqrt(90);
+    GEO_MAX_DEATH = Math.sqrt(160000/4),
+    GEO_MAX_DISPLACED = Math.sqrt(40000000/1.5),
+    GEO_MAX_DURATION = Math.sqrt(419*3),
+    GEO_MAX_AFFECTED = Math.sqrt(4814280*3);
 
 var selectDeath = 'death',
     selectDisplaced = 'displaced',

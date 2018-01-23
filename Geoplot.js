@@ -41,7 +41,7 @@ function Geoplot(){
     var mapPath = d3.geoPath()
         .projection(projection);
 
-    var R_MAX = screenH*0.08, R_MAX_LEGEND = screenH*0.212;//60 140
+    var R_MAX = screenH*0.1, R_MAX_LEGEND = screenH*0.212;// 0.08 -> 60  0.212 -> 140
 
     var k = 1;
 
@@ -141,7 +141,7 @@ function Geoplot(){
 
         //Only plot the map one time
     	var mapPlot = wrapper.select('.mapData').size() ===0?
-    	           wrapper.append('g').attr('class','mapData'):plot.select('.mapData')
+    	           wrapper.append('g').attr('class','mapData').attr('transform','translate(0,-10)'):plot.select('.mapData')
 
         //Plot the map
 	    mapPlot
@@ -241,7 +241,6 @@ function Geoplot(){
 	    scaleY = d3.scaleLinear()
 	        .domain([0,_meaScale]).range([0,R_MAX]);
 
-        
         radialBarUpdate = countryEnter.selectAll('.segment')
             .data(function(d){return d.values})
 
@@ -253,17 +252,17 @@ function Geoplot(){
                return no_space;
              })
             .classed('segment',true)
-            .attr('transform','translate(0,0)')
+            .attr('transform','translate(0,-10)')
             .each(function(d) { d.outerRadius = 0; })
             .style('fill', mainCol)
             .style('stroke-width','0px')
-            .style('opacity',0.35)
+            .style('opacity',defaultOpa)
 
         radialBarEnter.merge(radialBarUpdate)
             .attr('d', arc)
             .transition().duration(1000)
             .attrTween('d', function(d,index) {
-              var i = d3.interpolate(d.outerRadius, scaleY(d.value));
+              var i = d3.interpolate(d.outerRadius, scaleY(Math.sqrt(d.value)));
               return function(t) { d.outerRadius = i(t); return arc(d,index); };
             })
         
@@ -277,13 +276,8 @@ function Geoplot(){
                 d3.select(this).style('stroke-width',2/k)
                   .style('stroke','white')
 
-            	// d3.select(this).style('opacity',hightlightOpa)
             	var no_space = d.key.split(' ').join('')
-             //    d3.select('.allCountries')
-            	//   .selectAll('.segment.'+no_space)
-             //      .style('opacity',hightlightOpa)
-             //      .style('fill', highlightCol)
-             //      .style('stroke',highlightCol);
+
             	d3.selectAll('.legend')
             	  .selectAll('.seg-legend.'+no_space)
             	  .style('opacity',hightlightOpa)
@@ -296,12 +290,6 @@ function Geoplot(){
                 d3.select(this).style('stroke-width','0px')
                   .style('stroke','none');
 
-            	// d3.select(this).style('opacity',0.2);
-                //Hight all cause
-            	// d3.selectAll('.segment')
-            	//   .style('opacity',0.2)                  
-            	//   .style('fill', mainCol)
-             //      .style('stroke',mainCol);
             	d3.selectAll('.seg-legend').style('opacity',0.2)
             	  .style('fill', mainCol)
                   .style('stroke',mainCol)

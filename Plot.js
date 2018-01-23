@@ -48,6 +48,7 @@ function Flow(){
 	    //filter out the undefined cause
 	    floodByCause = floodByCause.filter(d => d.key !== 'undefined');
 
+
 	    //array of causes for scale
 	    cause = floodByCause.map(d => d.key);
 
