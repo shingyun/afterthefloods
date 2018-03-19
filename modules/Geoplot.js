@@ -450,7 +450,7 @@ function Geoplot(){
                 d3.select('.setMap').style('fill',highlightCol);
                 k = d3.zoomTransform(this).k;
             }))
-            
+
             //Reset the map
             d3.select('.setMap').on('click',function(){
                 k = 1;
